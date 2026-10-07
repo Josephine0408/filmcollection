@@ -1,0 +1,670 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josephine的異想世界 - 親師生平台網頁整理</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', '"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
+            font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+        }
+        .badge-category-學習單 { background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+        .badge-category-網頁 { background-color: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+        .badge-category-學生成果 { background-color: #fce7f3; color: #9d174d; border: 1px solid #fbcfe8; }
+        
+        .badge-subject-國語國文 { background-color: #fef3c7; color: #92400e; }
+        .badge-subject-英文 { background-color: #e0f2fe; color: #075985; }
+        .badge-subject-社會SEL { background-color: #dcfce7; color: #166534; }
+        .badge-subject-數學 { background-color: #fae8ff; color: #86198f; }
+        .badge-subject-多國語言 { background-color: #ffe4e6; color: #9f1239; }
+        .badge-subject-綜合跨領域 { background-color: #f3f4f6; color: #374151; }
+        
+        /* Fallback button styles */
+        button { cursor: pointer; }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans text-slate-800 antialiased flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-black text-2xl">
+                    J
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 tracking-tight">
+                        Josephine的異想世界
+                    </h1>
+                    <p class="text-xs text-slate-500 font-medium">親師生互動平台 · 智慧教學資源庫</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleFavoritesOnly()" id="favToggleBtn" class="px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-50 transition flex items-center space-x-2 text-slate-700">
+                    <i class="fa-regular fa-star text-amber-500" id="favStarIcon"></i>
+                    <span>我的收藏 (<span id="favCount">0</span>)</span>
+                </button>
+                <a href="#stats-section" class="hidden sm:flex px-4 py-2 rounded-xl text-sm font-semibold bg-blue-50 text-blue-600 hover:bg-blue-100 transition items-center space-x-2">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>資源統計</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner & Search -->
+    <section class="relative bg-gradient-to-b from-blue-900 via-indigo-950 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-5xl mx-auto relative z-10 text-center">
+            <span class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold mb-4">
+                <i class="fa-solid fa-sparkles text-amber-400"></i>
+                <span>歡迎來到的智慧教學基地</span>
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight mb-4 leading-tight">
+                探索豐富多元的學習資源與學生成果
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-8 font-normal">
+                精選國語、英文、社會技巧、跨領域與多國語言等多元互動教材、學習單及實作成果。
+            </p>
+
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto relative">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 text-slate-400 text-lg"></i>
+                    <input type="text" id="searchInput" 
+                        oninput="applyFilters()" 
+                        onkeyup="applyFilters()" 
+                        onchange="applyFilters()"
+                        placeholder="輸入關鍵字查詢（例如：論語、文法、Classkick、Wordwall、Padlet...）" 
+                        class="w-full pl-12 pr-12 py-4 rounded-2xl bg-white text-slate-900 placeholder-slate-400 font-medium shadow-2xl border border-white/20 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition">
+                    <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-4 text-slate-400 hover:text-slate-600">
+                        <i class="fa-solid fa-circle-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Filter Controls Section -->
+        <div class="bg-white rounded-3xl p-6 shadow-xl shadow-slate-200/50 border border-slate-100 mb-8 space-y-6">
+            
+            <!-- Category Filter Tabs -->
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <label class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-2">
+                        <i class="fa-solid fa-layer-group text-blue-500"></i>
+                        <span>資源類型分類 (Category)</span>
+                    </label>
+                    <span id="resultCountBadge" class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">載入中...</span>
+                </div>
+                <div class="flex flex-wrap gap-2" id="categoryFilterContainer">
+                    <button onclick="setCategoryFilter('ALL')" class="category-btn active px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center space-x-2 bg-blue-600 text-white shadow-md" data-val="ALL">
+                        <i class="fa-solid fa-cubes"></i>
+                        <span>全部類型</span>
+                    </button>
+                    <button onclick="setCategoryFilter('學習單')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center space-x-2 bg-slate-100 text-slate-700 hover:bg-slate-200" data-val="學習單">
+                        <i class="fa-solid fa-file-lines text-blue-600"></i>
+                        <span>學習單 (Worksheets)</span>
+                    </button>
+                    <button onclick="setCategoryFilter('網頁')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center space-x-2 bg-slate-100 text-slate-700 hover:bg-slate-200" data-val="網頁">
+                        <i class="fa-solid fa-globe text-indigo-600"></i>
+                        <span>網頁 & 線上互動</span>
+                    </button>
+                    <button onclick="setCategoryFilter('學生成果')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center space-x-2 bg-slate-100 text-slate-700 hover:bg-slate-200" data-val="學生成果">
+                        <i class="fa-solid fa-palette text-pink-600"></i>
+                        <span>學生成果 (Showcase)</span>
+                    </button>
+                </div>
+            </div>
+
+            <hr class="border-slate-100">
+
+            <!-- Subject & Grade Filters -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Subject Filter -->
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-2 mb-3">
+                        <i class="fa-solid fa-book-open text-purple-500"></i>
+                        <span>領域科目 (Subject)</span>
+                    </label>
+                    <div class="flex flex-wrap gap-2" id="subjectFilterContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Grade Filter -->
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-2 mb-3">
+                        <i class="fa-solid fa-graduation-cap text-emerald-500"></i>
+                        <span>適用年級 (Grade)</span>
+                    </label>
+                    <div class="flex flex-wrap gap-2" id="gradeFilterContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Filter Status & Reset -->
+            <div class="flex items-center justify-between pt-2 text-xs font-medium text-slate-500 border-t border-slate-100">
+                <div id="activeFilterTags" class="flex flex-wrap items-center gap-2">
+                    <span>當前篩選：</span>
+                    <span class="text-slate-400">顯示全部資源</span>
+                </div>
+                <button onclick="resetAllFilters()" class="text-blue-600 hover:text-blue-800 font-bold transition flex items-center space-x-1">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>重設所有條件</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Resource Cards Grid Container -->
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-slate-900 flex items-center space-x-2">
+                <span>資源列表</span>
+                <span class="text-xs text-slate-400 font-normal">（點擊卡片開啟連結）</span>
+            </h3>
+
+            <!-- View switch -->
+            <div class="flex items-center space-x-1 bg-slate-200/60 p-1 rounded-xl">
+                <button onclick="setViewMode('grid')" id="gridViewBtn" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-700 bg-white shadow-sm font-bold">
+                    <i class="fa-solid fa-border-all text-sm"></i>
+                </button>
+                <button onclick="setViewMode('list')" id="listViewBtn" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-700 font-bold">
+                    <i class="fa-solid fa-list text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Cards Layout -->
+        <div id="resourceContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cards rendered dynamically by JS -->
+        </div>
+
+        <!-- No Results State -->
+        <div id="noResults" class="hidden bg-white rounded-3xl p-12 text-center border border-slate-100 shadow-sm my-8">
+            <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-700 mb-2">找不到符合條件的資源</h4>
+            <p class="text-slate-500 text-sm mb-6">請嘗試調整搜尋關鍵字或清除篩選條件</p>
+            <button onclick="resetAllFilters()" class="px-6 py-2.5 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition shadow-lg shadow-blue-500/20">
+                清除所有篩選條件
+            </button>
+        </div>
+
+        <!-- Statistics & Quick Info Section -->
+        <section id="stats-section" class="mt-16 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-10 translate-y-10">
+                <i class="fa-solid fa-compass-drafting text-[240px]"></i>
+            </div>
+
+            <div class="relative z-10 max-w-4xl">
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2 block">Platform Overview</span>
+                <h3 class="text-2xl sm:text-3xl font-black mb-4">Josephine的異想世界 · 數據概覽</h3>
+                <p class="text-slate-300 text-sm mb-8 leading-relaxed">
+                    本平台整理整合了親師生作業、線上測驗、跨學科練習單與學生成果平台，提供快速檢閱與精確分類。
+                </p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <div class="text-3xl font-black text-blue-400 mb-1" id="statTotal">0</div>
+                        <div class="text-xs text-slate-300 font-medium">總學習資源</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <div class="text-3xl font-black text-purple-400 mb-1" id="statWorksheets">0</div>
+                        <div class="text-xs text-slate-300 font-medium">學習單與作業</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <div class="text-3xl font-black text-emerald-400 mb-1" id="statInteractive">0</div>
+                        <div class="text-xs text-slate-300 font-medium">網頁線上互動</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <div class="text-3xl font-black text-pink-400 mb-1" id="statShowcases">0</div>
+                        <div class="text-xs text-slate-300 font-medium">學生成果專區</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 space-y-2">
+            <p class="font-bold text-slate-700">Josephine的異想世界 · 親師生互動平台網頁整理</p>
+            <p>Designed for Interactive Learning & Parent-Teacher Collaboration</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Raw Resource Data
+        const RAW_DATA = [{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/467f9e33bb03","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/f07e1435439a","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/IVRHRW7fWvOG","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/AdtYs9mEe7Yi","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/iMPmm7syCjYI","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"線上教學資源","url":"https://preeminent-muffin-4e63f9.netlify.app","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"線上教學資源","url":"https://www.pagamo.org/launch_app/join_group?","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/GAtvwYKcB7D3","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/US6TlwNs0tnn","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/DuYFpa7urkEe","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"線上教學資源","url":"https://www.youtube.com/watch?v=lPXEF5pzmYw","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"線上教學資源","url":"https://yahoo.wakool.net/game/play/2000000360","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/67FX0OFoaQOS","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/9DsSFgHJNcir","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/3krpWtm93Hbr","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/D0jwKcQNEtAn","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/DsyRYwWWLUNj","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/CYZDU91UboYx","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/USL7GDy9fGFi","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/18431/034/865","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/18432/714/473","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/18433/896/959","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/18434/759/4853","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/18435/450/879","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/18436/376/151","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/18436/723/887","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/18437/731/667","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/38749/771/9522","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/play/38749/750/6618","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Wordwall 互動學習遊戲","url":"https://wordwall.net/resource/97345020/7-1-1-%e5%ad%a3%e7%af%80","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"Canva 簡報與教材","url":"https://josephine2205.my.canva.site/brxr038m08s82xqp?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/fa087093ee9b","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/72365f383fec","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/SNkel80Egb1u","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/GNMvodraDQ18","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://share.gemini.google/rbtusthIqgNB","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/079b1e13ed13","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/b8b236931b88","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/b182103027e7","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/8b4068c7a6e8","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/e48b09338977","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/c24f93778048","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/a92b25b26969","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/0a529d6740c4","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/c32468922e5c","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/c4a25e686c58","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/a2cfb22c8213","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/a0a464151ffe","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/d8579571f670?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/86005692d13c?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/7b9e66a80794?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Padlet 學習討論與成果板","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-o7lyheqcf7tb4d14","subject":"綜合/跨領域","grade":"八年級","category":"學生成果"},{"title":"翰林/南一線上測驗","url":"https://qt.hle.com.tw/40897188","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"翰林/南一線上測驗","url":"https://qt.hle.com.tw/38556526","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"翰林/南一線上測驗","url":"https://oneexam.oneclass.com.tw/quiz/05163545","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"翰林/南一線上測驗","url":"https://oneexam.oneclass.com.tw/quiz/27880317","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Padlet 學習討論與成果板","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-22xn8afl75zjwmv4","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"線上教學資源","url":"https://www.facebook.com/watch/?v=1019103925246832","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"Padlet 學習討論與成果板","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-qotk9gfxmiwp1k30","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"Padlet 學習討論與成果板","url":"https://padlet.com/tarait5664/padlet-5epevx2gj5bqyi28","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"線上教學資源","url":"https://drive.google.com/file/d/1o0ygOOGPqWEq4YYdDQzmA14M50ceIUT_/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Padlet 學習討論與成果板","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-qhcbhzhr22vi8v65","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"線上教學資源","url":"https://garticphone.com/zh-TW/?c=00c26a881a","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/1d349856abc7?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/e4f86464104d?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Canva 簡報與教材","url":"https://www.canva.com/design/DAG3zdhFjB4/F_a-C1ItsRmq7KQBCeVZuw/edit?utm_content=DAG3zdhFjB4\u0026amp;utm_campaign=designshare\u0026amp;utm_medium=link2\u0026amp;utm_source=sharebutton","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"Padlet 學習討論與成果板","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-yr7hxuyj9chu6951","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"Padlet 學習討論與成果板","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-mpdcu8zc8l9el57r","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"Canva 簡報與教材","url":"https://josephine2205.my.canva.site/dag2f8ujpkq","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"線上教學資源","url":"https://kahoot.it/solo/?quizId=044bcb7d-223f-4499-a93f-3ecd193ebe67","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/14bb8c239439","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/50e2f1c06005","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/5f9e1f9bb926","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/67ae991d13f6","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/216d267188c7","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/885072f64354","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/d06822358da7","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/c0c00bd79c8d","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/1b84b4274ad8","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/356589f7e230","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/a3a2a3cd05de","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/1a2d960631b3","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/5a87b47d03ac","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選   背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/838f419358c7第五課","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/1e0fd5482c88第六課","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/e1d095070489自選","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 )第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/23ad3db2954e文意理解(補救卷","subject":"國語/國文","grade":"七年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/02e6b8a638fa第五課","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/738fc12f52bb第六課","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚  貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/82da0379579c自選","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課","subject":"國語/國文","grade":"七年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/5e21419d3fd0第六課心囚","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   自選 貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/5425be50b0e1","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚    貪睡的長頸鹿https://gemini.google.com/share/97e6b809866e","url":"https://gemini.google.com/share/5425be50b0e1自選","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"注音國字:(請將每一個成績填寫在下方)第四課 論語選  https://gemini.google.com/share/838f419358c7第五課 背影https://gemini.google.com/share/1e0fd5482c88第六課  心囚https://gemini.google.com/share/e1d095070489自選 貪睡的長頸鹿 https://gemini.google.com/share/23ad3db2954e文意理解(補救卷)第四課論語https://gemini.google.com/share/02e6b8a638fa第五課 背影https://gemini.google.com/share/738fc12f52bb第六課 心囚 https://gemini.google.com/share/82da0379579c自選 貪睡的長頸鹿https://gemini.google.com/share/111af026b2b7平時卷第四課論語https://gemini.google.com/share/121379054c31第五課 背影https://gemini.google.com/share/5e21419d3fd0第六課心囚   https://gemini.google.com/share/5425be50b0e1自選 貪睡的長頸鹿","url":"https://gemini.google.com/share/97e6b809866e","subject":"國語/國文","grade":"通用/不限年級","category":"網頁"},{"title":"線上教學資源","url":"https://drive.google.com/file/d/1dQ3GeoqFvAheqEgBkuIAcIzbMcVxSpXB/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"線上教學資源","url":"https://drive.google.com/file/d/1mus7PEVZVOqzBuxzT8vouU5n9V4fhuKA/view?usp=classroom_web\u0026amp;authuser=1","subject":"國語/國文","grade":"通用/不限年級","category":"學習單"},{"title":"線上教學資源","url":"https://drive.google.com/file/d/1Y4cw0OkG4vXKzkNhotnlg3zzUA1sKb61/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"Canva 簡報與教材","url":"https://josephine2205.my.canva.site/bscp5gqp8ban5gf2","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Canva 簡報與教材","url":"https://josephine2205.my.canva.site/bscpv0prjqys74me","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"線上教學資源","url":"https://josephine2205.my.can","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"7-1-6 心囚","url":"https://josephine2205.my.canva.site/bs2wncganq5p2e8t","subject":"國語/國文","grade":"七年級","category":"網頁"},{"title":"7-1-5 背影生字生詞練習:","url":"https://josephine2205.my.canva.site/dag2lye-ey文義理解:https://kahoot.it/solo/?quizId=1382d9a3-e423-4c7d-888a-9b9751eecc68","subject":"國語/國文","grade":"七年級","category":"網頁"},{"title":"Canva 簡報與教材","url":"https://josephine2205.my.canva.site/dag11vju1gi","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"標點符號:  標點符號:https://josephine2205.my.canva.site/dag0aiytvcg","url":"https://wordwall.net/resource/98588632","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"標點符號: https://wordwall.net/resource/98588632 標點符號:","url":"https://josephine2205.my.canva.site/dag0aiytvcg","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"7-1-3母親的教誨:","url":"https://g.co/gemini/share/433c862871c5","subject":"國語/國文","grade":"七年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/417aa5565e11","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/18f38c078de2","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"Padlet 學習討論與成果板","url":"https://padlet.com/hualien_county_government_department_of_education/ruler-mo0wt8dos7au37ga","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"Gemini AI 輔助學習對話","url":"https://gemini.google.com/share/1ee52a7484ff?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://padlet.com/teacher99_7/padlet-s…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://padlet.com/teacher99_7/padlet-s…」","url":"https://padlet.com/teacher99_7/padlet-spq85q2ooxwxir87","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://padlet.com/teacher99_7/padlet-s…」","url":"https://drive.google.com/file/d/1XIx0zIpYzdOk9qcmJ0_wCXwgBYvXpNJy/view?usp=classroom_web\u0026amp;authuser=1","subject":"社會/SEL","grade":"通用/不限年級","category":"學習單"},{"title":"「https://padlet.com/teacher99_7/padlet-s…」","url":"https://drive.google.com/file/d/1m1k7sDNIzUC5RQfCuWB-gDPLifBGEMqB/view?usp=classroom_web\u0026amp;authuser=1","subject":"社會/SEL","grade":"通用/不限年級","category":"學習單"},{"title":"「https://padlet.com/teacher99_7/padlet-s…」","url":"https://www.msn.com/zh-tw/play/games/tile-connect-master/cg-9njs2r87z8t1?cgfrom=cg_landing_L2_match_3\u0026amp;extsrc=google\u0026amp;cvid=69255b5a57e64d16af76cbdb9a66c792\u0026amp;ei=10","subject":"綜合/跨領域","grade":"九年級","category":"學生成果"},{"title":"「https://padlet.com/teacher99_7/padlet-s…」","url":"https://www.msn.com/zh-tw/play/games/thief-puzzle/cg-9njb654d39wx?cgfrom=cg_landing_home_staffpicks\u0026amp;extsrc=google\u0026amp;cvid=692559628f61417fa16ba05cfb642102\u0026amp;ei=14","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://padlet.com/teacher99_7/padlet-s…」","url":"https://drive.google.com/file/d/18S5MFCebBfnufYj-BzG6q6KehI0um6yq/view?authuser=1\u0026amp;usp=classroom_web","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"公告：「活動一:","url":"https://garticphone.com/zh-TW/?c=00…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"活動一: (線上傳情)活動二:疾風畫影玩法每組先由 1–2 人輪流設題，想出 30 個「能畫得出來」的詞語（水果、動物、交通工具、日常物件等），寫在清單上。畫畫者要依序快速描繪題目，每題限時 3–4 秒，不得停筆過久。畫紙或白板上會留下滿滿的線條「痕跡」。出題者完成後，隨機喊出題號（如「第 7 題！」），畫畫者必須立即回答該題是什麼。若答錯，全場一起大笑，遊戲繼續。最佳電玩遊戲機各組交換畫紙，讓對方來猜彼此的答案。由於畫風混亂、線索模糊，笑料倍增。活動三:憤怒水果/蔬菜玩法流程：參加者面對面坐好。：主持示範「憤怒表情」：瞪眼、皺眉、咬牙。：兩人輪流用最憤怒的語氣、大聲喊出一種水果或蔬菜（如「香蕉！」、「苦瓜！」、「西蘭花！」）。：若有一方忍不住笑出聲音，立即判輸，換下一組上場。活動四:金庫密碼        一位同學想一個數字，引導學生想出密碼","url":"https://garticphone.com/zh-TW/?c=00933732a4","subject":"社會/SEL","grade":"通用/不限年級","category":"學生成果"},{"title":"「合作遊戲」","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-vslp6fnkkiqgue25","subject":"社會/SEL","grade":"通用/不限年級","category":"學生成果"},{"title":"公告：「","url":"https://josephine2205.my.canva.site/dag…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://josephine2205.my.canva.site/dag…」","url":"https://josephine2205.my.canva.site/dag3csaq3ki","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"10.21","url":"https://gemini.google.com/share/733fb27cfa10","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"「10.21…」","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-fw63s29lx4gnypka","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://josephine2205.my.canva.site/dag…」","url":"https://josephine2205.my.canva.site/dag0bf9vibg","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「請將測驗結果張貼於此:","url":"https://padlet.com/hualien_c…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"請將測驗結果張貼於此:","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-drmst8y604swt0fc","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"公告：「","url":"https://g.co/gemini/share/e4a196f398d3」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://g.co/gemini/share/e4a196f398d3」","url":"https://g.co/gemini/share/e4a196f398d3","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"下學期","url":"https://wordwall.net/tc/resource/106068297","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://gemini.google.com/share/3830ae6…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://gemini.google.com/share/3830ae6…」","url":"https://gemini.google.com/share/3830ae615784","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"115.01.08","url":"https://wordwall.net/tc/resource/105094746https://wordwall.net/tc/resource/105095308","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"114.12.31","url":"https://wordwall.net/resource/104864405","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「114.12.26 英文課文唸讀」","url":"https://gemini.google.com/share/4477aa11aa9c?authuser=1","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"「114.12.26 英文課文唸讀」","url":"https://gemini.google.com/share/4477aa11aa9c","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"「114.12.24」","url":"https://quizlet.com/tw/1125481335/8-1-5-how-do-we-go-to-the-hotel-flash-cards/?i=44h883\u0026amp;x=1qqW","subject":"英文","grade":"八年級","category":"網頁"},{"title":"「114.12.24」","url":"https://gemini.google.com/share/7c78a8555e24?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「114.12.24」","url":"https://gemini.google.com/share/7c78a8555e24","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"How do we go to our hotel?","url":"https://padlet.com/hualien_county_government_department_of_education/padlet-nw0bct1rk5ymo80r","subject":"英文","grade":"通用/不限年級","category":"學生成果"},{"title":"「How do we go to our hotel?…」","url":"https://drive.google.com/file/d/1FnTxqBrt--xYjdiOORcIW7m8wMhTczzS/view?authuser=1\u0026amp;usp=classroom_web","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"「How do we go to our hotel?…」","url":"https://drive.google.com/file/d/1ya8mMiUzZdnGQ69RqLjchWNFWzmkZwlU/view?usp=classroom_web\u0026amp;authuser=1","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"「How do we go to our hotel?…」","url":"https://drive.google.com/file/d/1Ms7Kf5M7ztp-i3iAnYwRCha08qH6IrOc/view?usp=classroom_web\u0026amp;authuser=1","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"「How do we go to our hotel?…」","url":"https://drive.google.com/file/d/1DTE3Rmru5eWIp_KZxAqtr9UiXLQR-ksL/view?usp=classroom_web\u0026amp;authuser=1","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「方向學習","url":"https://gemini.google.com/share/208…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"方向學習","url":"https://gemini.google.com/share/2087fa634c5d交通工具https://gemini.google.com/share/12855a436744總和練習題https://gemini.google.com/share/4c38f7ab3bc6","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"「方向學習https://gemini.google.com/share/208…」","url":"https://drive.google.com/file/d/1Vk3EFfjoqM6We5CiUxZbj2_O667qKAqT/view?authuser=1\u0026amp;usp=classroom_web","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「方向學習https://gemini.google.com/share/208…」","url":"https://drive.google.com/file/d/1HEi9x4Y9DcUCvReJ2opwgdM-uKznPPDc/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"8-1-5 常見場所","url":"https://gemini.google.com/share/b65ddd28752c","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"8-1-5 交通工具 英文單字學習網","url":"https://gemini.google.com/share/0139adcfe6c2","subject":"英文","grade":"八年級","category":"網頁"},{"title":"公告：「","url":"https://gemini.google.com/share/165c5ff…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"單字","url":"https://gemini.google.com/share/165c5ffd79e8","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"八年級第三課與第四課習作(文意字彙以及動詞變化)","url":"https://gemini.google.com/share/e810436b5843文法https://gemini.google.com/share/5513ef2eada9https://gemini.google.com/share/47ac8b6b6d95","subject":"國語/國文","grade":"八年級","category":"網頁"},{"title":"「114.10.31」","url":"https://quizlet.com/tw/1100823349/%E5%B7%A5%E4%BD%9C-flash-cards/?i=44h883\u0026amp;x=1jqW","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://wayground.com/admin/quiz/690309…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://wayground.com/admin/quiz/690309…」","url":"https://wayground.com/admin/quiz/690309aeee29a76b00366728?source=live_dash_game_complete\u0026amp;gameType=live\u0026amp;players=0","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「余旻翔","url":"https://qt.hle.com.tw/15436231…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"余旻翔","url":"https://qt.hle.com.tw/15436231林杰恩https://qt.hle.com.tw/56970652","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「114.10.17」","url":"https://quizlet.com/tw/1093706415/8-1-3-mom-was-doing-the-dishes-at-half-past-twelve-flash-cards/?i=44h883\u0026amp;x=1jqW","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"「114.10.17」","url":"https://josephine2205.my.canva.site/housework-vocabulary-matching-saw-arrangement","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://www.learnmode.net/course/727667…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://www.learnmode.net/course/727667?passcode=290530https://wordwall.net/tc/resource/11099772","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://sites.google.com/view/taloveje/%E7%B7%9A%E4%B8%8A%E9%81%8A%E6%88%B2%E6%94%B6%E9%9B%86?authuser=0","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://oneexam.oneclass.com.tw/quiz/26657373","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://docs.google.com/document/d/1oxag2Aqolfzsi3PipIFa7R9dJL9WpVOFtVb7OM5L1Uc/edit?usp=sharing","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://quizizz.com/admin/quiz/6784ba42ae32a765175858b3","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://quizizz.com/admin/quiz/677e10c31af8c1a9fac372ae?source=quiz_share","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://docs.google.com/document/d/11xz2OunK12gZE-sSNAWLXl1N3k1lesInzar2P930aug/edit?usp=sharing","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://quizizz.com/join?class=Z556307","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://wordwall.net/tc/resource/32419867/6-1%e7%ad%89%e5%80%bc%e5%88%86%e6%95%b8","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://padlet.com/josephine2205/sel-kcann0eym7mvrm85","subject":"社會/SEL","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://hlcedu.padlet.org/Teacher99/padlet-1k9o00fex824p35z","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://hlcedu.padlet.org/Teacher99/submission-request/oAdpz2px3r8wv10R","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://padlet.com/josephine2205/1nya1039vzjnwm0t","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://www.canva.com/design/DAGn-P8cwLU/6FF3dn54nrAg4JCnsbcCZg/edit?utm_content=DAGn-P8cwLU\u0026amp;utm_campaign=designshare\u0026amp;utm_medium=link2\u0026amp;utm_source=sharebutton","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://qt.hle.com.tw/58495051","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://hlcedu.padlet.org/Teacher99/padlet-z0khdur7v64eh4vk","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://www.canva.com/design/DAGgFktNjBA/3PrZOdCMZ9aFWsgtZ5SAqg/view?utm_content=DAGgFktNjBA\u0026amp;utm_campaign=designshare\u0026amp;utm_medium=link\u0026amp;utm_source=googleclassroom\u0026amp;mode=preview","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://www.youtube.com/watch?v=pR-mNj-s0LA","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://www.youtube.com/watch?v=dQyG8W3qoDQ","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://www.youtube.com/watch?v=e0BY80nrmmU","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://gitmind.com/tw/","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://hlcedu.padlet.org/Teacher99/qmjkqlrywjeuwdoz","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://hlcedu.padlet.org/Teacher99/my-first-sandbox-vgth7hrjfyibyxrf","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://hlcedu.padlet.org/dashboard/make?mobile_page=LayoutPicker","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「https://www.learnmode.net/course/727667…」","url":"https://forms.gle/cniZtJ1hqjKHzxJ6A","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「123」","url":"https://drive.google.com/file/d/1_6tGh7iGIz-wDE9XCDVnPEhig1A6R8u2/view?usp=classroom_web\u0026amp;authuser=1","subject":"多國語言","grade":"通用/不限年級","category":"網頁"},{"title":"「123」","url":"https://drive.google.com/file/d/1t_1LNvGWYfK6Acgye0xILRmUY1SE-LYC/view?usp=classroom_web\u0026amp;authuser=1","subject":"多國語言","grade":"通用/不限年級","category":"網頁"},{"title":"「123」","url":"https://drive.google.com/file/d/1CzwdgjX7728mfzjAgA17HZhzGILj5yhj/view?usp=classroom_web\u0026amp;authuser=1","subject":"多國語言","grade":"通用/不限年級","category":"網頁"},{"title":"「123」","url":"https://drive.google.com/file/d/1OcBLAZvENYvRu11wzsviSulrTxRTiHk8/view?usp=classroom_web\u0026amp;authuser=1","subject":"多國語言","grade":"通用/不限年級","category":"網頁"},{"title":"「123」","url":"https://drive.google.com/file/d/1QKIatw3fDEz3TJ5vhOfwJO6zsPSvPaEr/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「123」","url":"https://drive.google.com/file/d/1xeef4HqsipGPfJiE5q7aUAz4cLRiVaWR/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「1」","url":"https://wordwall.net/resource/80827167/8-1-3-%e6%96%87%e6%b3%95%e5%96%ae%e5%ad%97","subject":"英文","grade":"八年級","category":"網頁"},{"title":"公告：「","url":"https://wordwall.net/resource/80827167/…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「(1)","url":"https://wordwall.net/resource/803776…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"(1))https://quickfire.hle.com.tw/?id=JEN-2%E4%B8%8AU3%E6%99%82%E9%96%93%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%B3%95(3)https://quizizz.com/admin/quiz/66038f97ecb15d61694ec0d0/ylc-tnps-lhl","url":"https://wordwall.net/resource/80377693/%e8%8b%b1%e6%96%87%e6%95%b8%e5%ad%97%e6%99%82%e9%96%93(2","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"(1)https://wordwall.net/resource/80377693/%e8%8b%b1%e6%96%87%e6%95%b8%e5%ad%97%e6%99%82%e9%96%93(2))https://quizizz.com/admin/quiz/66038f97ecb15d61694ec0d0/ylc-tnps-lhl","url":"https://quickfire.hle.com.tw/?id=JEN-2%E4%B8%8AU3%E6%99%82%E9%96%93%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%B3%95(3","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"(1)https://wordwall.net/resource/80377693/%e8%8b%b1%e6%96%87%e6%95%b8%e5%ad%97%e6%99%82%e9%96%93(2)https://quickfire.hle.com.tw/?id=JEN-2%E4%B8%8AU3%E6%99%82%E9%96%93%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%B3%95(3)","url":"https://quizizz.com/admin/quiz/66038f97ecb15d61694ec0d0/ylc-tnps-lhl","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://quizlet.com/join/ZChAPuhgd?i=46…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://quizlet.com/join/ZChAPuhgd?i=46…」","url":"https://quizlet.com/join/ZChAPuhgd?i=46c1ic\u0026amp;x=1bqt","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://quizizz.com/join?c=yQQoZSzLk63A…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://quizizz.com/join?c=yQQoZSzLk63A…」","url":"https://quizizz.com/join?c=yQQoZSzLk63As1RPIchdFonHAJI2nkx-aWQiZ-kffOEDop3qT2GELQRhWKxxhgZwORLnKBMJOZrqKAuqZ-rnXPBWRizBk2j1iSwUsSD35OSxUnYZF6Pyy-yIeVBPhtjaq3Y0K7hkBb654qq0sp-LWV6oS2BKK7qCITB-m5svuIMMA0Q0llzS0edj8azfGwZtXv6Se1eeJe2DY2bj3Xu0Sp-u4g.uVLyddGjeqQQHozg7LrHRA.SmplnftlEqjENtbg\u0026amp;linktype=web","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「1」","url":"https://wordwall.net/play/93175/396/424","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://wordwall.net/play/93175/396/858」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://wordwall.net/play/93175/396/858」","url":"https://wordwall.net/play/93175/396/858","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://wordwall.net/resource/84378217」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://wordwall.net/resource/84378217」","url":"https://wordwall.net/resource/84378217","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://wordwall.net/resource/84378217」","url":"https://wordwall.net/resource/84378217/%e7%bf%b0%e6%9e%97b2-u5theme-words-1-%e9%81%8e%e5%8e%bb%e6%99%82%e9%96%93%e7%9a%84%e8%aa%aa%e6%b3%95","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"公告：「","url":"https://wordwall.net/play/92160/188/747」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://wordwall.net/play/92160/188/747」","url":"https://wordwall.net/play/92160/188/747","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「114.03.05」","url":"https://wordwall.net/play/87845/474/219","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://www.learnmode.net/course/694642…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://www.learnmode.net/course/694642…」","url":"https://www.learnmode.net/course/694642?passcode=149209","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://quizizz.com/admin/quiz/677e0724…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://quizizz.com/admin/quiz/677e0724…」","url":"https://quizizz.com/admin/quiz/677e0724373fe41f6ab4b40a","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"翰林線上測驗操作說明：請同學進入本次的任務連結，再依照網站指示完成任務","url":"https://qt.hle.com.tw/19661598","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「113.12.10 日期詢問」","url":"https://wordwall.net/tc/resource/64252254/grammar/%e5%ba%b7%e8%bb%92%e8%8b%b1%e8%aa%9e-b2l3%e6%96%87%e6%b3%951when%e8%a9%a2%e5%95%8f%e6%97%a5%e6%9c%9f","subject":"英文","grade":"七年級","category":"網頁"},{"title":"「113.11.05」","url":"https://wordwall.net/play/81271/291/867","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「113.11.06」","url":"https://wordwall.net/play/81271/053/490","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「113.10.30」","url":"https://wordwall.net/resource/80847012/113070103-%e5%96%ae%e5%ad%97","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://quizlet.com/tw/963928290/11307-…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://quizlet.com/tw/963928290/11307-…」","url":"https://quizlet.com/tw/963928290/11307-01-03-%E5%96%AE%E5%AD%97-flash-cards/?i=46c1ic\u0026amp;x=1jqt","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「111」","url":"https://wordwall.net/tc/resource/80388843/113-07-01-03","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://qt.hle.com.tw/02073265…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://qt.hle.com.tw/02073265…」","url":"https://qt.hle.com.tw/02073265https://wordwall.net/tc/resource/80388843/113-07-01-03","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://quizlet.com/tw/938431817/113%E5…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://quizlet.com/tw/938431817/113%E5…」","url":"https://quizlet.com/tw/938431817/113%E5%AD%B8%E5%B9%B4%E5%BA%A6%E4%B8%83%E5%B9%B4%E7%B4%9A%E8%8B%B1%E6%96%87-flash-cards/?i=46c1ic\u0026amp;x=1jqt","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"請完成下列測驗題，並將結果貼到","url":"https://app.classkick.com/#/login/8ROIGH","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「請完成下列測驗題，並將結果貼到…」","url":"https://www.ettoday.net/dalemon/post/25209","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「請完成下列測驗題，並將結果貼到…」","url":"https://ideapit.com/7d8r","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「請完成下列測驗題，並將結果貼到…」","url":"https://woman.udn.com/woman/story/123164/7828763?from=udn-search_ch4087","subject":"社會/SEL","grade":"通用/不限年級","category":"網頁"},{"title":"「請完成下列測驗題，並將結果貼到…」","url":"https://quiz.kuioo.tw/iq/","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「請完成下列測驗題，並將結果貼到…」","url":"https://www.beauty321.com/post/50997","subject":"社會/SEL","grade":"通用/不限年級","category":"網頁"},{"title":"\\l \"/login/GHV3NT\"","url":"https://app.classkick.com/","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「請完成下列測驗題，並將結果貼到…」","url":"https://app.classkick.com/#/login/GHV3NT","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"公告：「","url":"https://whiteboard.fi/179a8075-713c-495…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://whiteboard.fi/179a8075-713c-495…」","url":"https://whiteboard.fi/179a8075-713c-4959-8e62-25d77df942c2","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「寫出十個感興趣的問題」","url":"https://app.classkick.com/#/login/8LCJ8R","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「113.04.22」","url":"https://app.classkick.com/#/login/E4J48H","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「113.04.22」","url":"https://whiteboard.fi/26234f91-1f91-4fa9-99c9-7681daf43016","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"113.04.15步驟一: 請看下列文章 完成 第一頁步驟二:請利用AI 尋找921 大地震與0403地震的差別  完成之後 完成上述classkick 第二頁步驟三:請利用搜尋系統完成第三頁 有關0403大地震損失並將這三張整理到canva 中 並將作品連結貼在作業區","url":"https://app.classkick.com/#/login/HP9Q9H","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「113.04.15 步驟一: 請看下列文章…」","url":"https://tw.news.yahoo.com/403%E5%9C%B0%E9%9C%87-%E7%A7%91%E5%AD%B8%E5%AE%B6%E5%80%91%E5%A6%82%E4%BD%95%E5%81%9A%E8%AA%BF%E6%9F%A5-%E8%A7%80%E5%AF%9F%E5%88%B0%E5%93%AA%E4%BA%9B%E5%80%BC%E5%BE%97%E6%B3%A8%E6%84%8F%E7%9A%84%E7%8F%BE%E8%B1%A1-%E6%88%91%E5%80%91%E7%9A%84%E5%B3%B6-023500318.html","subject":"綜合/跨領域","grade":"八年級","category":"學習單"},{"title":"「113.04.15 步驟一: 請看下列文章…」","url":"https://www.canva.com/design/DAGCeAi-olE/xBTxkP7VMsz1StHnKEuxWw/edit?utm_content=DAGCeAi-olE\u0026amp;utm_campaign=designshare\u0026amp;utm_medium=link2\u0026amp;utm_source=sharebutton","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://app.classkick.com/#/login/ZJYBL…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「https://app.classkick.com/#/login/ZJYBL…」","url":"https://app.classkick.com/#/login/ZJYBLFhttps://gitmind.com/app/templates?lang=twhttps://www.canva.com/","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「1120401」","url":"https://app.classkick.com/#/login/GH6CA8","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「1130318請上網找尋成語的意思，並且將意思貼在檔案中」","url":"https://app.classkick.com/#/login/QI7U2Y","subject":"國語/國文","grade":"通用/不限年級","category":"學習單"},{"title":"「1130311」","url":"https://app.classkick.com/#/login/SUZGH8","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「改變從哪裡做起」","url":"https://app.classkick.com/#/login/FIOP3T","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"公告：「","url":"https://quiz.knsh.com.tw/students/login…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://quiz.knsh.com.tw/students/login…」","url":"https://quiz.knsh.com.tw/students/login/001kt4","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「1121229國文課」","url":"https://drive.google.com/file/d/1WmwDoFYUc3tEok4yal5vSyutbF3-7C-1/view?usp=classroom_web\u0026amp;authuser=1","subject":"國語/國文","grade":"通用/不限年級","category":"學習單"},{"title":"「1121226」","url":"https://app.classkick.com/#/login/OUF3ZB","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「請寫出有那些問題?」","url":"https://padlet.com/josephine2205/cfhi9jdvihlcusp8","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「1121225」","url":"https://app.classkick.com/#/login/TO95N7","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"公告：「","url":"https://app.classkick.com/#/login/IM8NBS」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「https://app.classkick.com/#/login/IM8NBS」","url":"https://app.classkick.com/#/login/IM8NBS","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「斯德哥爾摩症候群」","url":"https://app.classkick.com/#/login/PZPHXC","subject":"多國語言","grade":"通用/不限年級","category":"學習單"},{"title":"公告：「","url":"https://sites.google.com/view/taloveje/…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://sites.google.com/view/taloveje/…」","url":"https://sites.google.com/view/taloveje/%E5%89%B5%E4%BD%9C%E5%8D%80?authuser=0","subject":"綜合/跨領域","grade":"九年級","category":"網頁"},{"title":"「1121213」","url":"https://app.classkick.com/#/login/KZUN6Y","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「1121212九年即英文」","url":"https://quizlet.com/tw/862879740/%E4%BD%B3%E9%9F%B3%E7%BF%B0%E6%9E%97%E5%9C%8B%E4%B8%AD%E8%8B%B1%E8%AA%9Ebook-5_9%E4%B8%8Au5_%E5%96%AE%E5%AD%97%E5%85%A8-flash-cards/?i=46c1ic\u0026amp;x=1qqW","subject":"英文","grade":"八年級","category":"網頁"},{"title":"「1121206社會技巧」","url":"https://app.classkick.com/#/login/VUP4QM","subject":"社會/SEL","grade":"通用/不限年級","category":"學習單"},{"title":"「1121204學習策略」","url":"https://app.classkick.com/#/login/6S5AHD","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"公告：「八年級英文單字區","url":"https://reurl.cc/L6GxRX…」","subject":"英文","grade":"八年級","category":"網頁"},{"title":"八年級英文單字區","url":"https://reurl.cc/L6GxRXhttps://oneexam.oneclass.com.tw/quiz/78759212","subject":"英文","grade":"八年級","category":"網頁"},{"title":"九年級英文單字區","url":"https://oneexam.oneclass.com.tw/quiz/49888069","subject":"英文","grade":"九年級","category":"網頁"},{"title":"「九年級英文單字區…」","url":"https://quizlet.com/tw/856010131/1121128-flash-cards/?i=44h883\u0026amp;x=1qqW","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「九年級複習","url":"https://oneexam.oneclass.com.tw/qu…」","subject":"綜合/跨領域","grade":"九年級","category":"網頁"},{"title":"九年級複習 11/28 11:502.請同學使用電腦或平板進入測驗網站，不建議使用手機作答：https://oneexam.oneclass.com.tw/quiz/594998523.請先輸入姓名與座號，打 ✓ 確認資料無誤，依照網站指示完成測驗4.待老師公佈解答後，請同學至 https://oneexam.oneclass.com.tw 點擊右上角「查看測驗結果」，輸入測驗碼 5949 9852、姓名與座號，點擊查看後複習錯題","url":"https://oneexam.oneclass.com.tw/quiz/10988958八年級複習https://oneexam.oneclass.com.tw/quiz/59499852南一雲端出題速測操作說明：1.本次考試截止時間為","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"九年級複習https://oneexam.oneclass.com.tw/quiz/10988958八年級複習https://oneexam.oneclass.com.tw/quiz/59499852南一雲端出題速測操作說明：1.本次考試截止時間為 11/28 11:502.請同學使用電腦或平板進入測驗網站，不建議使用手機作答： ✓ 確認資料無誤，依照網站指示完成測驗4.待老師公佈解答後，請同學至 https://oneexam.oneclass.com.tw 點擊右上角「查看測驗結果」，輸入測驗碼 5949 9852、姓名與座號，點擊查看後複習錯題","url":"https://oneexam.oneclass.com.tw/quiz/594998523.請先輸入姓名與座號，打","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"九年級複習/quiz/10988958八年級複習/quiz/59499852南一雲端出題速測操作說明：1.本次考試截止時間為 11/28 11:502.請同學使用電腦或平板進入測驗網站，不建議使用手機作答：/quiz/594998523.請先輸入姓名與座號，打 ✓ 確認資料無誤，依照網站指示完成測驗4.待老師公佈解答後，請同學至  點擊右上角「查看測驗結果」，輸入測驗碼 5949 9852、姓名與座號，點擊查看後複習錯題","url":"https://oneexam.oneclass.com.tw","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"「九年級複習https://oneexam.oneclass.com.tw/qu…」","url":"https://drive.google.com/file/d/1V8H7bWac_YgbfWbskXMF_dY6lS7Kxnsi/view?authuser=1\u0026amp;usp=classroom_web","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「1121121」","url":"https://quizlet.com/tw/854028711/1121121%E4%B9%9D%E5%B9%B4%E7%B4%9A-flash-cards/?i=44h883\u0026amp;x=1jqW","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"「1121120」","url":"https://create.kahoot.it/share/1121120/ad087ef3-8c4c-4811-934b-e9b42232d439","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"「1121113」","url":"https://app.classkick.com/#/login/SMULTA","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「112.10.31」","url":"https://padlet.com/josephine2205/st62kcq9o88i9chp","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學生成果"},{"title":"「1121030」","url":"https://whiteboard.fi/48cbc7e4-a9a9-41c5-863d-0af34578b642","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「1121030」","url":"https://whiteboard.fi/085057e8-c948-499f-ad6f-168f34b431c0","subject":"綜合/跨領域","grade":"八年級","category":"網頁"},{"title":"「1121030」","url":"https://app.classkick.com/#/login/HGLGZU","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「1121030課程內容」","url":"https://drive.google.com/file/d/1IzKtwwNILSAgZzZa534ksPB0Qq60oP1Z/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"公告：「","url":"https://whiteboard.fi/1c66a488-50c0-40b…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://whiteboard.fi/1c66a488-50c0-40b…」","url":"https://whiteboard.fi/1c66a488-50c0-40b8-80b7-0d7b6ffd3b84","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「結果」","url":"https://www.elle.com/tw/beauty/health/g41423006/mental-test-problem-solving-ability/","subject":"社會/SEL","grade":"通用/不限年級","category":"網頁"},{"title":"「結果」","url":"https://www.elle.com/tw/life/how-to/g39435573/test-affraid/","subject":"社會/SEL","grade":"通用/不限年級","category":"網頁"},{"title":"「結果」","url":"https://www.storm.mg/lifestyle/4469779","subject":"社會/SEL","grade":"通用/不限年級","category":"網頁"},{"title":"「112.10.25」","url":"https://app.classkick.com/#/login/7TJ9LD","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「112.10.23」","url":"https://app.classkick.com/#/login/ATRP5Q","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「1121016」","url":"https://app.classkick.com/#/login/DIE3QT","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「112.10.04適合的服裝」","url":"https://app.classkick.com/#/login/RD45FL","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「10/02 工作一:填寫下列思辨 工作二:pagamo 中9/28…」","url":"https://app.classkick.com/#/login/7LYOIF","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「刻板印象」","url":"https://app.classkick.com/#/login/XFZXN8","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「112.09.19課堂中需完成的事情 1、品學堂 2、classkick…」","url":"https://app.classkick.com/#/login/GKPCNN","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「請回答下列問題」","url":"https://app.classkick.com/#/login/XNQUW5","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「112」","url":"https://drive.google.com/file/d/1SsE5LMlNJpqrRocH9NfgfLSvLIkxRNF4/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「112.09.06」","url":"https://quizlet.com/tw/303321404/%E5%8D%97%E4%B8%80%E5%9C%8B%E4%B8%AD%E5%9C%8B%E6%96%87%E7%AC%AC%E4%B8%89%E5%86%8A%E7%AC%AC%E4%BA%8C%E8%AA%B2%E8%81%B2%E9%9F%B3%E9%90%98-flash-cards/?i=44h883\u0026amp;x=1jqW","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"「112.09.06」","url":"https://docs.google.com/forms/d/1mUk8DZDG6oPfqLZccud926rHeaMcuNRb_AQH2mR5Pkw/edit?authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「下列文章缺乏分句，請完成分句，並將檔案存檔，上傳」","url":"https://drive.google.com/file/d/1jMHhJcEzgsTgxC5M4zU-Y_T7VxVpuMAd/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"學習單"},{"title":"「並將改寫的填入此處」","url":"https://padlet.com/josephine2205/Bookmarks","subject":"英文","grade":"通用/不限年級","category":"學生成果"},{"title":"「111.01.13(2)」","url":"https://quizlet.com/tw/658751866/%E4%B8%83%E5%B9%B4%E7%B4%9A%E8%8B%B1%E6%96%87%E7%AC%AC%E4%BA%94%E8%AA%B2%E8%88%87%E7%AC%AC%E5%85%AD%E8%AA%B2-flash-cards/?i=46c1ic\u0026amp;x=1jqW","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"「111.01.13 七年級英文第五課與第六課」","url":"https://quizlet.com/tw/658751866/%E4%B8%83%E5%B9%B4%E7%B4%9A%E8%8B%B1%E6%96%87%E7%AC%AC%E4%BA%94%E8%AA%B2%E8%88%87%E7%AC%AC%E5%85%AD%E8%AA%B2-flash-cards/?i=46c1ic\u0026amp;x=1qqW","subject":"英文","grade":"七年級","category":"網頁"},{"title":"「第六課句子念一念111.01.13」","url":"https://quizlet.com/tw/658709991/%E7%AC%AC%E5%85%AD%E8%AA%B2%E5%8F%A5%E5%AD%90%E5%BF%B5%E4%B8%80%E5%BF%B5-flash-cards/?i=46c1ic\u0026amp;x=1jqW","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"「第五課句子念一念111.01.13」","url":"https://quizlet.com/tw/658701203/%E7%AC%AC%E4%BA%94%E8%AA%B2%E5%8F%A5%E5%AD%90%E5%BF%B5%E4%B8%80%E5%BF%B5-flash-cards/?i=46c1ic\u0026amp;x=1jqW","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"「111.01.13第五課句子」","url":"https://wordwall.net/resource/27425366/%e4%b8%83%e5%b9%b4%e7%b4%9a%e7%ac%ac%e4%ba%94%e8%aa%b2%e5%8f%a5%e5%ad%90","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"「111.01.13第六課句子」","url":"https://wordwall.net/resource/27425589/%e7%ac%ac%e5%85%ad%e8%aa%b2%e8%8b%b1%e6%96%87%e5%8f%a5%e5%ad%90","subject":"綜合/跨領域","grade":"七年級","category":"網頁"},{"title":"「先從1寫到4 在完成總複習 進行拼寫」","url":"https://quizlet.com/Josephine22055/folders/book-6?i=46c1ic\u0026amp;x=1xqW","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"「12.29 總複習」","url":"https://quizlet.com/tw/655143274/book-1-unit-5-%E7%B8%BD-flash-cards/?i=46c1ic\u0026amp;x=1jqW","subject":"英文","grade":"通用/不限年級","category":"網頁"},{"title":"「12/28（2）」","url":"https://wordwall.net/play/26950/741/509","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「12/28總測驗」","url":"https://wordwall.net/play/26950/741/952","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「第五課（1）」","url":"https://quizlet.com/_atzis0?x=1jqt\u0026amp;i=46c1ic","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「第五課（二）」","url":"https://quizlet.com/_atziw1?x=1jqt\u0026amp;i=46c1ic","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「第五課（3）」","url":"https://quizlet.com/_atziyh?x=1jqt\u0026amp;i=46c1ic","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「第五課（4）」","url":"https://quizlet.com/_atzj24?x=1jqt\u0026amp;i=46c1ic","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「1」","url":"https://wordwall.net/play/26924/826/830","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"公告：「","url":"https://onlineexam.nani.com.tw/exam/lis…」","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://onlineexam.nani.com.tw/exam/lis…」","url":"https://onlineexam.nani.com.tw/exam/listing","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"},{"title":"「https://onlineexam.nani.com.tw/exam/lis…」","url":"https://drive.google.com/file/d/1nnrde4Xp7R6LuuL2vpo4iZM--OxmF4IJ/view?usp=classroom_web\u0026amp;authuser=1","subject":"綜合/跨領域","grade":"通用/不限年級","category":"網頁"}];
+
+        // Application State
+        let currentCategory = 'ALL';
+        let currentSubject = 'ALL';
+        let currentGrade = 'ALL';
+        let viewMode = 'grid';
+        let favoritesOnly = false;
+        let favorites = [];
+
+        try {
+            favorites = JSON.parse(localStorage.getItem('josephine_favs') || '[]');
+        } catch(e) {
+            favorites = [];
+        }
+
+        function bootApp() {
+            initSubjectFilter();
+            initGradeFilter();
+            updateFavCount();
+            applyFilters();
+            updateStats();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', bootApp);
+        } else {
+            bootApp();
+        }
+
+        // Unique subjects & grades extraction
+        function initSubjectFilter() {
+            const subjects = ['ALL', '國語/國文', '英文', '社會/SEL', '數學', '多國語言', '綜合/跨領域'];
+            const container = document.getElementById('subjectFilterContainer');
+            if (!container) return;
+            
+            container.innerHTML = subjects.map(sub => {
+                const label = sub === 'ALL' ? '全部科目' : sub;
+                return `<button onclick="setSubjectFilter('${sub}')" 
+                    class="subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition" 
+                    data-val="${sub}">${label}</button>`;
+            }).join('');
+            
+            updateSubjectButtons();
+        }
+
+        function initGradeFilter() {
+            const grades = ['ALL', '七年級', '八年級', '九年級', '通用/不限年級'];
+            const container = document.getElementById('gradeFilterContainer');
+            if (!container) return;
+            
+            container.innerHTML = grades.map(grd => {
+                const label = grd === 'ALL' ? '全部年級' : grd;
+                return `<button onclick="setGradeFilter('${grd}')" 
+                    class="grade-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition" 
+                    data-val="${grd}">${label}</button>`;
+            }).join('');
+            
+            updateGradeButtons();
+        }
+
+        function setCategoryFilter(val) {
+            currentCategory = val;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.dataset.val === val) {
+                    btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+                    btn.classList.remove('bg-slate-100', 'text-slate-700');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                    btn.classList.add('bg-slate-100', 'text-slate-700');
+                }
+            });
+            applyFilters();
+        }
+
+        function setSubjectFilter(val) {
+            currentSubject = val;
+            updateSubjectButtons();
+            applyFilters();
+        }
+
+        function updateSubjectButtons() {
+            document.querySelectorAll('.subject-btn').forEach(btn => {
+                if (btn.dataset.val === currentSubject) {
+                    btn.classList.add('bg-purple-600', 'text-white', 'border-purple-600');
+                    btn.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+                } else {
+                    btn.classList.remove('bg-purple-600', 'text-white', 'border-purple-600');
+                    btn.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+                }
+            });
+        }
+
+        function setGradeFilter(val) {
+            currentGrade = val;
+            updateGradeButtons();
+            applyFilters();
+        }
+
+        function updateGradeButtons() {
+            document.querySelectorAll('.grade-btn').forEach(btn => {
+                if (btn.dataset.val === currentGrade) {
+                    btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+                    btn.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+                } else {
+                    btn.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-600');
+                    btn.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+                }
+            });
+        }
+
+        function toggleFavoritesOnly() {
+            favoritesOnly = !favoritesOnly;
+            const btn = document.getElementById('favToggleBtn');
+            const icon = document.getElementById('favStarIcon');
+            
+            if (favoritesOnly) {
+                btn.classList.add('bg-amber-500', 'text-white', 'border-amber-500');
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid', 'text-white');
+            } else {
+                btn.classList.remove('bg-amber-500', 'text-white', 'border-amber-500');
+                icon.classList.remove('fa-solid', 'text-white');
+                icon.classList.add('fa-regular', 'text-amber-500');
+            }
+            applyFilters();
+        }
+
+        function toggleFavorite(url) {
+            if (favorites.includes(url)) {
+                favorites = favorites.filter(f => f !== url);
+            } else {
+                favorites.push(url);
+            }
+            try {
+                localStorage.setItem('josephine_favs', JSON.stringify(favorites));
+            } catch(e) {}
+            updateFavCount();
+            applyFilters();
+        }
+
+        function updateFavCount() {
+            const el = document.getElementById('favCount');
+            if (el) el.innerText = favorites.length;
+        }
+
+        function resetAllFilters() {
+            currentCategory = 'ALL';
+            currentSubject = 'ALL';
+            currentGrade = 'ALL';
+            favoritesOnly = false;
+            const input = document.getElementById('searchInput');
+            if (input) input.value = '';
+            
+            setCategoryFilter('ALL');
+            updateSubjectButtons();
+            updateGradeButtons();
+            
+            const btn = document.getElementById('favToggleBtn');
+            const icon = document.getElementById('favStarIcon');
+            if (btn && icon) {
+                btn.classList.remove('bg-amber-500', 'text-white', 'border-amber-500');
+                icon.classList.remove('fa-solid', 'text-white');
+                icon.classList.add('fa-regular', 'text-amber-500');
+            }
+
+            applyFilters();
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('searchInput');
+            if (input) input.value = '';
+            applyFilters();
+        }
+
+        function setViewMode(mode) {
+            viewMode = mode;
+            const gBtn = document.getElementById('gridViewBtn');
+            const lBtn = document.getElementById('listViewBtn');
+            
+            if (mode === 'grid') {
+                if (gBtn) gBtn.className = "w-8 h-8 rounded-lg flex items-center justify-center text-slate-700 bg-white shadow-sm font-bold";
+                if (lBtn) lBtn.className = "w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-700 font-bold";
+            } else {
+                if (lBtn) lBtn.className = "w-8 h-8 rounded-lg flex items-center justify-center text-slate-700 bg-white shadow-sm font-bold";
+                if (gBtn) gBtn.className = "w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-700 font-bold";
+            }
+            applyFilters();
+        }
+
+        function getPlatformIcon(url) {
+            if (!url) return '<i class="fa-solid fa-link text-slate-400"></i>';
+            if (url.includes('wordwall.net')) return '<i class="fa-solid fa-gamepad text-emerald-500"></i>';
+            if (url.includes('quizlet.com')) return '<i class="fa-solid fa-layer-group text-blue-500"></i>';
+            if (url.includes('quizizz.com') || url.includes('wayground.com')) return '<i class="fa-solid fa-bolt text-purple-500"></i>';
+            if (url.includes('padlet.com') || url.includes('padlet.org')) return '<i class="fa-solid fa-chalkboard text-pink-500"></i>';
+            if (url.includes('gemini.google.com') || url.includes('share.gemini')) return '<i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i>';
+            if (url.includes('canva.com') || url.includes('canva.site')) return '<i class="fa-solid fa-paint-brush text-cyan-500"></i>';
+            if (url.includes('classkick.com')) return '<i class="fa-solid fa-file-pen text-indigo-500"></i>';
+            if (url.includes('drive.google.com')) return '<i class="fa-solid fa-file-pdf text-red-500"></i>';
+            if (url.includes('youtube.com')) return '<i class="fa-brands fa-youtube text-red-600"></i>';
+            return '<i class="fa-solid fa-link text-slate-400"></i>';
+        }
+
+        function getHostname(urlStr) {
+            try {
+                return new URL(urlStr).hostname;
+            } catch(e) {
+                return urlStr || '';
+            }
+        }
+
+        function applyFilters() {
+            const input = document.getElementById('searchInput');
+            const query = input ? input.value.trim().toLowerCase() : '';
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (clearBtn) {
+                if (query) clearBtn.classList.remove('hidden');
+                else clearBtn.classList.add('hidden');
+            }
+
+            const terms = query ? query.split(/\s+/).filter(Boolean) : [];
+
+            const filtered = RAW_DATA.filter(item => {
+                if (currentCategory !== 'ALL' && item.category !== currentCategory) return false;
+                if (currentSubject !== 'ALL' && item.subject !== currentSubject) return false;
+                if (currentGrade !== 'ALL' && item.grade !== currentGrade) return false;
+                if (favoritesOnly && !favorites.includes(item.url)) return false;
+                
+                if (terms.length > 0) {
+                    const matchText = ((item.title || '') + ' ' + (item.subject || '') + ' ' + (item.grade || '') + ' ' + (item.category || '') + ' ' + (item.url || '')).toLowerCase();
+                    const allMatched = terms.every(term => matchText.includes(term));
+                    if (!allMatched) return false;
+                }
+                return true;
+            });
+
+            // Update badge count
+            const badge = document.getElementById('resultCountBadge');
+            if (badge) badge.innerText = `顯示 ${filtered.length} 項資源`;
+
+            // Active filter tags update
+            const activeTags = [];
+            if (currentCategory !== 'ALL') activeTags.push(`類別: ${currentCategory}`);
+            if (currentSubject !== 'ALL') activeTags.push(`科目: ${currentSubject}`);
+            if (currentGrade !== 'ALL') activeTags.push(`年級: ${currentGrade}`);
+            if (favoritesOnly) activeTags.push(`只看收藏`);
+            if (query) activeTags.push(`搜尋: "${query}"`);
+
+            const tagsContainer = document.getElementById('activeFilterTags');
+            if (tagsContainer) {
+                if (activeTags.length === 0) {
+                    tagsContainer.innerHTML = '<span>當前篩選：</span><span class="text-slate-400">顯示全部資源</span>';
+                } else {
+                    tagsContainer.innerHTML = '<span>當前篩選：</span>' + activeTags.map(t => `<span class="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-md font-semibold">${t}</span>`).join(' ');
+                }
+            }
+
+            renderResources(filtered);
+        }
+
+        function renderResources(data) {
+            const container = document.getElementById('resourceContainer');
+            const noResults = document.getElementById('noResults');
+
+            if (!container) return;
+
+            if (data.length === 0) {
+                container.innerHTML = '';
+                if (noResults) noResults.classList.remove('hidden');
+                return;
+            }
+            if (noResults) noResults.classList.add('hidden');
+
+            if (viewMode === 'grid') {
+                container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+                container.innerHTML = data.map(item => {
+                    const isFav = favorites.includes(item.url);
+                    const icon = getPlatformIcon(item.url);
+                    const safeSub = (item.subject || '').replace('/', '');
+                    const subjectClass = `badge-subject-${safeSub}`;
+                    const categoryClass = `badge-category-${item.category}`;
+
+                    return `
+                    <div class="glass-card rounded-2xl p-5 hover:shadow-xl hover:-translate-y-1 transition duration-200 flex flex-col justify-between group">
+                        <div>
+                            <!-- Card Header Badges -->
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-bold ${categoryClass}">
+                                    ${item.category}
+                                </span>
+                                <div class="flex items-center space-x-1">
+                                    <span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-slate-100 text-slate-600">
+                                        ${item.grade}
+                                    </span>
+                                    <button onclick="toggleFavorite('${item.url}')" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-amber-50 text-slate-300 hover:text-amber-500 transition">
+                                        <i class="${isFav ? 'fa-solid text-amber-500' : 'fa-regular'} fa-star"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <h4 class="text-base font-bold text-slate-800 group-hover:text-blue-600 transition line-clamp-2 mb-3 leading-snug">
+                                ${item.title}
+                            </h4>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center space-x-2 text-xs font-semibold text-slate-500 mb-4">
+                                <span class="px-2 py-0.5 rounded-md ${subjectClass}">
+                                    ${item.subject}
+                                </span>
+                                <span class="truncate text-slate-400 font-mono text-[11px]">
+                                    ${getHostname(item.url)}
+                                </span>
+                            </div>
+
+                            <!-- Footer Link Button -->
+                            <a href="${item.url}" target="_blank" rel="noopener noreferrer" 
+                                class="w-full py-2.5 px-4 rounded-xl bg-slate-100 group-hover:bg-blue-600 group-hover:text-white text-slate-700 font-semibold text-xs flex items-center justify-center space-x-2 transition shadow-sm">
+                                ${icon}
+                                <span>開啟資源連結</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-70"></i>
+                            </a>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+            } else {
+                container.className = "flex flex-col space-y-3";
+                container.innerHTML = data.map(item => {
+                    const isFav = favorites.includes(item.url);
+                    const icon = getPlatformIcon(item.url);
+                    const categoryClass = `badge-category-${item.category}`;
+
+                    return `
+                    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-lg shrink-0 mt-0.5">
+                                ${icon}
+                            </div>
+                            <div>
+                                <div class="flex items-center space-x-2 mb-1 flex-wrap gap-1">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${categoryClass}">${item.category}</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600">${item.subject}</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-500">${item.grade}</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-slate-800 hover:text-blue-600 transition">
+                                    ${item.title}
+                                </h4>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3 shrink-0 self-end sm:self-center">
+                            <button onclick="toggleFavorite('${item.url}')" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-amber-50 text-slate-300 hover:text-amber-500 transition">
+                                <i class="${isFav ? 'fa-solid text-amber-500' : 'fa-regular'} fa-star"></i>
+                            </button>
+                            <a href="${item.url}" target="_blank" rel="noopener noreferrer" 
+                                class="py-2 px-4 rounded-xl bg-blue-600 text-white font-semibold text-xs flex items-center space-x-1.5 hover:bg-blue-700 transition shadow-sm">
+                                <span>前往連結</span>
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function updateStats() {
+            const total = document.getElementById('statTotal');
+            const ws = document.getElementById('statWorksheets');
+            const inter = document.getElementById('statInteractive');
+            const sc = document.getElementById('statShowcases');
+
+            if (total) total.innerText = RAW_DATA.length;
+            if (ws) ws.innerText = RAW_DATA.filter(i => i.category === '學習單').length;
+            if (inter) inter.innerText = RAW_DATA.filter(i => i.category === '網頁').length;
+            if (sc) sc.innerText = RAW_DATA.filter(i => i.category === '學生成果').length;
+        }
+    </script>
+</body>
+</html>
